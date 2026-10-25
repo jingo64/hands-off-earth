@@ -1,0 +1,45 @@
+[b]Requires Unity Mod Manager.[/b] Without it this mod won't load. Install steps are below.
+
+[h1]Hands-off Earth[/h1]
+Once Earth is settled, the mission phase mostly means clicking through the same councilor orders every few weeks. This mod finishes the mission phase for you when every councilor already has orders, and makes the game's councilor automation less repetitive.
+
+[h2]Features[/h2]
+[list]
+[*]When every councilor is automated or on a repeat order, the mission phase finishes by itself and the game keeps running
+[*]Councilors left without orders still stop the phase as normal
+[*]The phase still stops if, since the last one, you lost a control point, a councilor was killed or detained, or an enemy mission targeted one of your councilors. A councilor message says why
+[*]Smarter automation: Defend Interests and Protect are only favoured where something actually threatens the target (enemy control points, known enemy councilors, a recently lost control point), and repeating last phase's mission on a quiet target is discouraged
+[*]Optionally let automated councilors use Gain Influence, Crackdown, Purge and Detain, but only in nations where you hold control points
+[*]Priority rules: tick "Use priority rules" on a nation's priorities tab and its preset is picked for you from a list of rules you write, such as "GDP per capita < 15,000: Developing". Opted-in nations are checked every month and switch preset as they grow
+[*]Only councilors you set to automate are affected. Anyone you manage by hand picks missions exactly as before
+[*]AI factions are unaffected
+[/list]
+
+[h2]Installation[/h2]
+[olist]
+[*]Download [url=https://www.nexusmods.com/site/mods/21]Unity Mod Manager[/url] and run UnityModManager.exe. Pick Terra Invicta, choose the [b]DoorstopProxy[/b] method and click Install.
+[*][b]Linux / Steam Deck only:[/b] set this as Terra Invicta's launch option in Steam:
+[code]WINEDLLOVERRIDES="winhttp=n,b" %command%[/code]
+[*]Subscribe to this mod and start the game. "Hands-off Earth" should appear in the UMM window (Ctrl+F10).
+[/olist]
+
+[h2]How to use[/h2]
+[olist]
+[*]Turn on [b]Unpause after mission assignment[/b] in the game's options, so the game carries on once the phase is finished.
+[*]Set your councilors to automate, or give them repeat orders.
+[*]For priority rules, open a nation's priorities tab and press [b]Priority rules[/b]. Each rule is a preset plus conditions on stats like GDP, research, mission control, military tech, sustainability or cohesion. Rules are checked top to bottom and the first one that matches wins; a rule with no conditions catches everything else. The preview shows any nation's current stats and which rule it would get. Then tick [b]Use priority rules[/b] on the nations you want handled.
+[*]Change what stops the phase, and which extra missions automation may use, in the UMM window (Ctrl+F10).
+[/olist]
+
+[h2]Good to know[/h2]
+[list]
+[*]The first mission phase after loading a save can't tell what you lost before the load, so it only checks for councilors without orders.
+[*]Crackdown and Purge make the target faction hate you, which is why they're off by default.
+[*]Workshop updates reset the mod's settings, so check them after an update.
+[*]Rules are shared by all your campaigns and refer to presets by name, so save your custom presets under the same names in each campaign. A rule whose preset doesn't exist is skipped.
+[*]Hand changes to an opted-in nation's priorities are replaced at the next monthly check. Untick it to manage it yourself.
+[*]Nothing is stored in your save (the nations using priority rules are kept in a small .handsoff file next to it). Safe to add or remove mid-campaign.
+[/list]
+
+[h2]Bugs and source[/h2]
+Source code and bug reports are on [url=https://github.com/jingo64/hands-off-earth]GitHub[/url]. If something breaks, please attach UMM's log ([i]TerraInvicta_Data/Managed/UnityModManager/Log.txt[/i]). The mod logs each automated councilor's pick there.

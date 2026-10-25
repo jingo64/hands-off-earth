@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Terra Invicta runs on Unity 2020.3 Mono (.NET 4.x API) -->
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>HandsOffEarth</AssemblyName>
+    <RootNamespace>HandsOffEarth</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <TIGame Condition="'$(TIGame)' == ''">$(HOME)/.local/share/Steam/steamapps/common/Terra Invicta</TIGame>
+    <TIManaged>$(TIGame)/TerraInvicta_Data/Managed</TIManaged>
+    <!-- Must match ModInfo Title: the game installs subscribed mods into Mods/Enabled/<title> -->
+    <TIModDir>$(TIGame)/Mods/Enabled/Hands-off Earth</TIModDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <!-- Game / engine / UMM assemblies: compile against them, never copy them into the mod -->
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp" HintPath="$(TIManaged)/Assembly-CSharp.dll" Private="false" />
+    <Reference Include="UnityEngine" HintPath="$(TIManaged)/UnityEngine.dll" Private="false" />
+    <Reference Include="UnityEngine.CoreModule" HintPath="$(TIManaged)/UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="UnityEngine.IMGUIModule" HintPath="$(TIManaged)/UnityEngine.IMGUIModule.dll" Private="false" />
+    <Reference Include="UnityEngine.UI" HintPath="$(TIManaged)/UnityEngine.UI.dll" Private="false" />
+    <Reference Include="UnityEngine.UIModule" HintPath="$(TIManaged)/UnityEngine.UIModule.dll" Private="false" />
+    <Reference Include="UnityEngine.TextRenderingModule" HintPath="$(TIManaged)/UnityEngine.TextRenderingModule.dll" Private="false" />
+    <Reference Include="Newtonsoft.Json" HintPath="$(TIManaged)/Newtonsoft.Json.dll" Private="false" />
+    <Reference Include="Unity.TextMeshPro" HintPath="$(TIManaged)/Unity.TextMeshPro.dll" Private="false" />
+    <Reference Include="UnityModManager" HintPath="$(TIManaged)/UnityModManager/UnityModManager.dll" Private="false" />
+    <Reference Include="0Harmony" HintPath="$(TIManaged)/UnityModManager/0Harmony.dll" Private="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ModInfo.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- `dotnet build -c Release -p:Deploy=true` copies the mod into the game's Mods/Enabled folder -->
+  <Target Name="DeployToGame" AfterTargets="Build" Condition="'$(Deploy)' == 'true'">
+    <Copy SourceFiles="$(TargetDir)$(AssemblyName).dll;$(TargetDir)ModInfo.json" DestinationFolder="$(TIModDir)" />
+    <Message Importance="high" Text="Deployed to $(TIModDir)" />
+  </Target>
+
+</Project>

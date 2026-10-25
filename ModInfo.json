@@ -1,0 +1,14 @@
+{
+	"Id": "HandsOffEarth",
+	"DisplayName": "Hands-off Earth",
+	"Title": "Hands-off Earth",
+	"Author": "dmeadows",
+	"Version": "0.1.0",
+	"Requirements": [],
+	"ManagerVersion": "0.24.0.0",
+	"AssemblyName": "HandsOffEarth.dll",
+	"EntryMethod": "HandsOffEarth.Main.Load",
+	"ModURL": "",
+	"HomePage": "",
+	"Description": "Skips the mission phase when all your councilors already have orders, unless something on Earth needs a look."
+}
